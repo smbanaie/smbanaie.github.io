@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}صفحه اصلی - روزنوشت‌های سید مجتبی بنائی{% endblock %}
+
+{% block content %}
+	{% for article in articles[0:2] %}
+    <div class="fh5co-narrow-content article-content">
+        <h1 class="fh5co-heading-colored"> <a href="{{ SITEURL }}/{{ article.url }}"> {{article.title }} </a></h1>
+        <div>{{ _('by') }}
+            {% for author in article.authors %}
+                <a href="{{ author.url }}">{{ author }}</a>{% if not loop.last %}, {% endif %}
+            {% endfor %} - {{ article.locale_date }}
+        </div>
+		<div>گروه : <a href="{{ article.category.url }}">{{ article.category }} </a>  </div>
+		
+        {% if article.tags %}
+            <div><span>برچسب‌ها: </span>
+                {% for tag in article.tags %}
+                    <span><a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}</a> </span>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="animate-box" data-animate-effect="fadeInLeft">
+            <p class="animate-box" data-animate-effect="fadeInLeft">{{ article.content }}</p>
+        </div>
+		<div class="animate-box" data-animate-effect="fadeInLeft">
+            <div>
+
+			<h3><!-- <i class="icon-speech-bubble"></i>  -->{{ _('Comments') }}</h3>
+		 
+		
+        {% for ct in COMMENTS %}
+				{% if  ct.url == SITEURL+"/blog/"+article.date|strftime('%Y')+"/"+article.date|strftime('%m')+"/"+article.slug+".html" %}
+				<p class="comment"><b>{{ct.name}} : </b> {{ ct.message }} </p> 
+				{% endif %}
+             
+		{% endfor %}
+		<br/>
+		<a class="btn btn-primary" href={{ article.url }} style="margin-bottom:40px">
+		ارسال نظر 
+		</a>
+		<br/>
+		
+    </div>
+        </div>
+    </div>
+
+ {% endfor %}
+ 
+	{% include 'partial/categories.html' %}
+    {% include 'partial/latest.html' %}
+   
+
+
+    {% if ICONS %}
+        <ul class="demo-icons">
+        {% for icon in ICONS %}
+            <li><i class="{{ icon  }}"></i> {{ icon }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+       
+
+{% endblock %}
