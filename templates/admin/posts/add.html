@@ -1,573 +1,335 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html>
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>افزودن یک نوشته جدید | کنترل پنل</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href='{{static_url("css/bootstrap-theme.css")}}' type="text/css" >
-  <!-- Bootstrap rtl -->
-  <link rel="stylesheet" href='{{static_url("css/rtl.css")}}' type="text/css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href='{{static_url("bower_components/font-awesome/css/font-awesome.min.css")}}' type="text/css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href='{{static_url("bower_components/Ionicons/css/ionicons.min.css")}}' type="text/css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href='{{static_url("css/AdminLTE.css")}}' type="text/css">
-  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href='{{static_url("css/skins/skin-blue.min.css")}}' type="text/css">
-  <link rel="stylesheet" href='{{static_url("bower_components/simplemde-markdown-editor/dist/simplemde.min.css")}}' type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ "ویرایش مطلب" if edit_mode else "افزودن مطلب جدید" }} | کنترل پنل</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- SimpleMDE CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplemde@1.11.2/dist/simplemde.min.css">
+  
+  <!-- Custom Admin CSS -->
+  <link rel="stylesheet" href='{{static_url("css/AdminLTE.css")}}'>
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
-<body class="hold-transition skin-blue sidebar-mini">
+<body>
 <div class="wrapper">
-
-  <!-- Main Header -->
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">پنل</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>کنترل پنل مدیریت</b></span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-
-
-     
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">۴ پیام خوانده نشده</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        علیرضا
-                        <small><i class="fa fa-clock-o"></i> ۵ دقیقه پیش</small>
-                      </h4>
-                      <p>متن پیام</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        نگین
-                        <small><i class="fa fa-clock-o"></i> ۲ ساعت پیش</small>
-                      </h4>
-                      <p>متن پیام</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        نسترن
-                        <small><i class="fa fa-clock-o"></i> امروز</small>
-                      </h4>
-                      <p>متن پیام</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        نگین
-                        <small><i class="fa fa-clock-o"></i> دیروز</small>
-                      </h4>
-                      <p>متن پیام</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        نسترن
-                        <small><i class="fa fa-clock-o"></i> ۲ روز پیش</small>
-                      </h4>
-                      <p>متن پیام</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">نمایش تمام پیام ها</a></li>
-            </ul>
-          </li>
-          <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">۱۰</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">۱۰ اعلان جدید</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> ۵ کاربر جدید ثبت نام کردند
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> اخطار دقت کنید
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> ۴ کاربر جدید ثبت نام کردند
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> ۲۵ سفارش جدید
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> نام کاربریتان را تغییر دادید
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">نمایش همه</a></li>
-            </ul>
-          </li>
-          <!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">۹</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">۹ کار برای انجام دارید</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        ساخت دکمه
-                        <small class="pull-right">20%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% تکمیل شده</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        ساخت قالب جدید
-                        <small class="pull-right">40%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">40% تکمیل شده</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        تبلیغات
-                        <small class="pull-right">60%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">60% تکمیل شده</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        ساخت صفحه فرود
-                        <small class="pull-right">80%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">80% تکمیل شده</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                </ul>
-              </li>
-              <li class="footer">
-                <a href="#">نمایش همه</a>
-              </li>
-            </ul>
-          </li>
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">علیرضا حسینی زاده</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  علیرضا حسینی زاده
-                  <small>مدیریت کل سایت</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">صفحه من</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">فروش</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">دوستان</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">پروفایل</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">خروج</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- right side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-right image">
-          <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-right info">
-          <p>علیرضا حسینی زاده</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
-        </div>
-      </div>
-
-      <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="جستجو">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">تیتر</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>لینک</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>لینک ۲</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>چند سطحی</span>
-            <span class="pull-left-container">
-                <i class="fa fa-angle-right pull-left"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">لینک سطح ۱</a></li>
-            <li><a href="#">لینک سطح ۱</a></li>
-          </ul>
-        </li>
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-افزودن مطلب جدید        <small>نسخه آزمایشی</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
-        <li class="active">صفحه</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
     <section class="content container-fluid">
-      <textarea id="editSection"></textarea>
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
-
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ "ویرایش مطلب" if edit_mode else "افزودن مطلب جدید" }}</h3>
+                        <div class="card-tools">
+                            {% if edit_mode %}
+                            <a href="/admin/posts" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-arrow-left"></i> بازگشت به لیست
+                            </a>
+                            {% end %}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    <form id="postForm" method="post" enctype="multipart/form-data">
+                        {% if edit_mode %}
+                        <input type="hidden" name="action" value="edit">
+                        <input type="hidden" name="file_path" value="{{ file_path }}">
+                        {% else %}
+                        <input type="hidden" name="action" value="add">
+                        {% end %}
+                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <!-- Content Editor -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">محتوای مطلب</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="contentEditor" class="form-label">متن مطلب</label>
+                                            <textarea id="contentEditor" name="article" style="display:none;">{{ article if article else '' }}</textarea>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="summary" class="form-label">چکیده</label>
+                                            <textarea class="form-control" id="summary" name="summary" rows="3" 
+                                                      placeholder="خلاصه یک جمله‌ای متن">{{ summary if summary else '' }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            
+                            <div class="col-md-4">
+                                <!-- Post Settings -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">تنظیمات مطلب</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="title" class="form-label">عنوان</label>
+                                            <input type="text" class="form-control" id="title" name="title" 
+                                                   value="{{ title if title else '' }}" required>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="slug" class="form-label">نام صفحه (URL)</label>
+                                            <input type="text" class="form-control" id="slug" name="slug" 
+                                                   value="{{ slug if slug else '' }}" required>
+                                            <div class="form-text">این نام برای لینک مطلب استفاده می‌شود</div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="category" class="form-label">دسته‌بندی</label>
+                                            <select class="form-select" id="category" name="category" required>
+                                                <option value="">انتخاب دسته‌بندی</option>
+                                                {% for key, value in catlist.items() %}
+                                                <option value="{{value}}" {% if category_value and value == category_value %}selected{% end %}>{{key}}</option>
+                                                {% end for %}
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="authors" class="form-label">نویسنده</label>
+                                            <select class="form-select" id="authors" name="authors" required>
+                                                <option value="">انتخاب نویسنده</option>
+                                                {% for user in authors %}
+                                                <option value="{{user}}" {% if authors_value and user == authors_value %}selected{% end %}>{{user}}</option>
+                                                {% end for %}
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="tags" class="form-label">برچسب‌ها</label>
+                                            <input type="text" class="form-control" id="tags" name="tags" 
+                                                   value="{{ tagsvalues if tagsvalues else '' }}" 
+                                                   placeholder="برچسب‌ها را با کاما جدا کنید">
+                                            <div class="form-text">مثلاً: فناوری, برنامه‌نویسی, وب</div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="year" class="form-label">سال</label>
+                                                    <input type="number" class="form-control" id="year" name="year" 
+                                                           value="{{ year if year else '' }}" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="month" class="form-label">ماه</label>
+                                                    <input type="number" class="form-control" id="month" name="month" 
+                                                           value="{{ month if month else '' }}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="image" class="form-label">تصویر شاخص</label>
+                                            <input type="file" class="form-control" id="image" name="image">
+                                            <div class="form-text">فرمت‌های پشتیبانی شده: JPG, PNG, GIF</div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="img_desc" class="form-label">توضیح تصویر</label>
+                                            <input type="text" class="form-control" id="img_desc" name="img_desc" 
+                                                   value="{{ img_desc if img_desc else '' }}" 
+                                                   placeholder="توضیح مختصر درباره تصویر">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="img_adr" class="form-label">مسیر تصویر</label>
+                                            <input type="text" class="form-control" id="img_adr" name="img_adr" 
+                                                   value="{{ img_adr if img_adr else '' }}" 
+                                                   placeholder="/images/blog/category/year/month/">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Actions -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-grid gap-2">
+                                            <button type="submit" class="btn btn-primary btn-lg">
+                                                <i class="fas fa-save"></i> 
+                                                {{ "به‌روزرسانی مطلب" if edit_mode else "ذخیره مطلب" }}
+                                            </button>
+                                            <a href="/admin/posts" class="btn btn-secondary">
+                                                <i class="fas fa-times"></i> لغو
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer text-left">
-    <strong>Copyleft &copy; 2014-2017 <a href="https://adminlte.io">Almsaeed Studio</a> & <a href="http://hosseinizadeh.ir/adminlte">Alireza Hosseinizadeh</a></strong>
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">فعالیت ها</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">تولد غلوم</h4>
-
-                <p>۲۴ مرداد</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">پیشرفت کارها</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <h4 class="control-sidebar-subheading">
-                آپدیت لاراول
-                <span class="pull-left-container">
-                    <span class="label label-danger pull-left">70%</span>
-                  </span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">تب وضعیت</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">تنظیمات عمومی</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              گزارش کنترلر پنل
-              <input type="checkbox" class="pull-left" checked>
-            </label>
-
-            <p>
-              ثبت تمامی فعالیت های مدیران
-            </p>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">موفقیت</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    <strong>{{ "مطلب با موفقیت به‌روزرسانی شد!" if edit_mode else "مطلب جدید با موفقیت ایجاد شد!" }}</strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">باشه</button>
+                <a href="/admin/posts" class="btn btn-secondary">بازگشت به لیست</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- jQuery 3 -->
-<script src='{{static_url("bower_components/jquery/jquery.min.js")}}'></script>
-<!-- Bootstrap 3.3.7 -->
-<script src='{{static_url("bower_components/bootstrap/js/bootstrap.min.js")}}'></script>
-<!-- AdminLTE App -->
-<script src='{{static_url("js/adminlte.min.js")}}'></script>
-<script src='{{static_url("bower_components/simplemde-markdown-editor/dist/simplemde.min.js")}}'></script>
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">خطا</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>خطا در ذخیره مطلب!</strong>
+                    <p id="errorMessage"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- SimpleMDE JS -->
+<script src="https://cdn.jsdelivr.net/npm/simplemde@1.11.2/dist/simplemde.min.js"></script>
 
 <script>
-<!--var simplemde = new SimpleMDE({ element: document.getElementById("editSection") });-->
-var simplemde = new SimpleMDE({
-	autofocus: true,
-	autosave: {
-		enabled: true,
-		uniqueId: "MyUniqueID",
-		delay: 1000,
-	},
-	blockStyles: {
-		bold: "__",
-		italic: "_"
-	},
-	element: document.getElementById("editSection"),
-	forceSync: true,
-	hideIcons: ["guide", "heading"],
-	indentWithTabs: false,
-	initialValue: "Hello world!",
-	insertTexts: {
-		horizontalRule: ["", "\n\n-----\n\n"],
-		image: ["![](http://", ")"],
-		link: ["[", "](http://)"],
-		table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
-	},
-	lineWrapping: false,
-	parsingConfig: {
-		allowAtxHeaderWithoutSpace: true,
-		strikethrough: false,
-		underscoresBreakWords: true,
-	},
-	placeholder: "Type here...",
-	previewRender: function(plainText) {
-		return customMarkdownParser(plainText); // Returns HTML from a custom parser
-	},
-	previewRender: function(plainText, preview) { // Async method
-		setTimeout(function(){
-			preview.innerHTML = customMarkdownParser(plainText);
-		}, 250);
-
-		return "Loading...";
-	},
-	promptURLs: true,
-	renderingConfig: {
-		singleLineBreaks: false,
-		codeSyntaxHighlighting: true,
-	},
-	shortcuts: {
-		drawTable: "Cmd-Alt-T"
-	},
-	showIcons: ["code", "table"],
-	spellChecker: false,
-	status: false,
-	status: ["autosave", "lines", "words", "cursor"], // Optional usage
-	status: ["autosave", "lines", "words", "cursor", {
-		className: "keystrokes",
-		defaultValue: function(el) {
-			this.keystrokes = 0;
-			el.innerHTML = "0 Keystrokes";
-		},
-		onUpdate: function(el) {
-			el.innerHTML = ++this.keystrokes + " Keystrokes";
-		}
-	}], // Another optional usage, with a custom status bar item that counts keystrokes
-	styleSelectedText: false,
-	tabSize: 4
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize SimpleMDE editor
+    const simplemde = new SimpleMDE({
+        element: document.getElementById("contentEditor"),
+        spellChecker: false,
+        autosave: {
+            enabled: true,
+            uniqueId: "contentEditor",
+            delay: 1000,
+        },
+        toolbar: [
+            "bold", "italic", "heading", "|",
+            "quote", "unordered-list", "ordered-list", "|",
+            "link", "image", "|",
+            "preview", "side-by-side", "fullscreen", "|",
+            "guide"
+        ]
+    });
+    
+    // Set initial content if editing
+    {% if article %}
+    simplemde.value(`{{ article.replace('\n', '\\n').replace('\r', '\\r').replace('"', '\\"') }}`);
+    {% end %}
+    
+    // Form submission handler
+    document.getElementById('postForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(this);
+        
+        // Add editor content
+        const content = simplemde.value();
+        formData.set('article', content);
+        
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ذخیره...';
+        submitBtn.disabled = true;
+        
+        // Submit form
+        fetch('/admin/posts/add', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes('error') || data.includes('Error')) {
+                document.getElementById('errorMessage').textContent = data;
+                new bootstrap.Modal(document.getElementById('errorModal')).show();
+            } else {
+                new bootstrap.Modal(document.getElementById('successModal')).show();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('errorMessage').textContent = 'خطا در ارتباط با سرور';
+            new bootstrap.Modal(document.getElementById('errorModal')).show();
+        })
+        .finally(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    });
+    
+    // Auto-generate slug from title
+    document.getElementById('title').addEventListener('input', function() {
+        const title = this.value;
+        const slug = title
+            .toLowerCase()
+            .replace(/[^a-z0-9\u0600-\u06FF\uFB8A\u067E\u0686\u06AF]/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+        document.getElementById('slug').value = slug;
+    });
+    
+    // Update image path when category changes
+    document.getElementById('category').addEventListener('change', function() {
+        const category = this.value;
+        const year = document.getElementById('year').value;
+        const month = document.getElementById('month').value;
+        if (category && year && month) {
+            document.getElementById('img_adr').value = `/images/blog/${category}/${year}/${month}/`;
+        }
+    });
+    
+    // Update image path when year/month changes
+    document.getElementById('year').addEventListener('change', updateImagePath);
+    document.getElementById('month').addEventListener('change', updateImagePath);
+    
+    function updateImagePath() {
+        const category = document.getElementById('category').value;
+        const year = document.getElementById('year').value;
+        const month = document.getElementById('month').value;
+        if (category && year && month) {
+            document.getElementById('img_adr').value = `/images/blog/${category}/${year}/${month}/`;
+        }
+    }
 });
 </script>
 </body>

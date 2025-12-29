@@ -10,29 +10,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>افزودن یک نوشته جدید | کنترل پنل</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href='{{static_url("css/bootstrap-theme.css")}}' type="text/css" >
-  <!-- Bootstrap rtl -->
-  <link rel="stylesheet" href='{{static_url("css/rtl.css")}}' type="text/css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href='{{static_url("bower_components/font-awesome/css/font-awesome.min.css")}}' type="text/css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href='{{static_url("bower_components/Ionicons/css/ionicons.min.css")}}' type="text/css">
-  <link rel="stylesheet" href='{{static_url("bower_components/select2/dist/css/select2.min.css")}}' type="text/css">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AdminLTE CSS -->
+  <link rel="stylesheet" href='{{static_url("css/adminlte.min.css")}}'>
+  <!-- RTL Support -->
+  <link rel="stylesheet" href='{{static_url("css/rtl.css")}}'>
+  
+  <!-- SimpleMDE CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplemde@1.11.2/dist/simplemde.min.css">
+  
+  <!-- Quill editor -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
-  <link rel="stylesheet" href='{{static_url("bower_components/codemirror/lib/codemirror.css")}}'>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
-    <link rel="stylesheet" href='{{static_url("bower_components/tui-editor/dist/tui-editor.css")}}'>
-<link rel="stylesheet" href='{{static_url("bower_components/tui-editor/dist/tui-editor-contents.css")}}'>
-<link rel="stylesheet" href='{{static_url("bower_components/tui-color-picker/dist/tui-color-picker.css")}}'>
-
-  <!-- Theme style -->
-  <link rel="stylesheet" href='{{static_url("css/AdminLTE.css")}}' type="text/css">
-  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href='{{static_url("css/skins/skin-blue.min.css")}}' type="text/css">
-  <link rel="stylesheet" href='{{static_url("bower_components/simplemde-markdown-editor/dist/simplemde.min.css")}}' type="text/css">
+  <!-- Quill editor -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -103,7 +99,7 @@ desired effect
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src='{{static_url("img/user2-160x160.jpg")}}' class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         علیرضا
@@ -116,7 +112,7 @@ desired effect
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src='{{static_url("img/user3-128x128.jpg")}}' class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         نگین
@@ -140,7 +136,7 @@ desired effect
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src='{{static_url("img/user3-128x128.jpg")}}' class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         نگین
@@ -152,7 +148,7 @@ desired effect
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src='{{static_url("img/user4-128x128.jpg")}}' class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         نسترن
@@ -288,71 +284,59 @@ desired effect
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src='{{static_url("img/user2-160x160.jpg")}}' class="user-image" alt="User Image">
               <span class="hidden-xs">علیرضا حسینی زاده</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
-              <li class="user-header">
-                <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <!-- Quill editor (free) and form wiring -->
+              <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+              <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+              <script>
+              $(document).ready(function(){
+                 $(function () {
+                  //Initialize Select2 Elements
+                  $('#tags').select2({
+                    tags: true
+                  });
+                  $('#category').select2();
+                  $('#authors').select2();
+                });
 
-                <p>
-                  علیرضا حسینی زاده
-                  <small>مدیریت کل سایت</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">صفحه من</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">فروش</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">دوستان</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">پروفایل</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">خروج</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- right side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+                // Initialize Quill editor on the div
+                var quill = new Quill('#quill_editor', {
+                  theme: 'snow',
+                  modules: {
+                    toolbar: [['bold','italic','underline'], [{ 'list': 'ordered'}, { 'list': 'bullet' }], ['link','image'], [{ 'align': [] }]]
+                  }
+                });
+                // set RTL direction for editor content
+                var qEditor = document.querySelector('#quill_editor .ql-editor');
+                if (qEditor) qEditor.setAttribute('dir','rtl');
 
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+                // If server provided initial content, populate editor
+                var initial = document.getElementById('article_content');
+                if (initial && initial.value) {
+                  quill.root.innerHTML = initial.value;
+                }
 
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-right image">
-          <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-right info">
-          <p>علیرضا حسینی زاده</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
-        </div>
-      </div>
+                $("#editContent").submit(function(){
+                  // put Quill HTML into hidden article input
+                  var content = quill ? quill.root.innerHTML : '';
+                  $('#article').val(content);
+                });
 
+                $("#category").change(function() {
+                  $('#img_adr').val("/images/blog/"+$(this).val() + "/"+ $("#year").val()+"/"+$("#month").val()+"/");
+                  $('#cat_name').val($("option:selected", $("#category")).text());
+                });
+
+                $("#tags").change(function() {
+                  $('#tagsvalues').val($(this).val())
+                });
+
+              });
+              </script>
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
@@ -370,6 +354,7 @@ desired effect
         <li class="header">تیتر</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>لینک</span></a></li>
+        <li><a href="/admin/posts"><i class="fa fa-list"></i> <span>لیست مطالب</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>لینک ۲</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>چند سطحی</span>
@@ -428,11 +413,11 @@ desired effect
                   <div class="col-md-6">
                 <div class="form-group">
                   <label for="title">عنوان</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="عنوان">
+                  <input type="text" class="form-control" id="title" name="title" placeholder="عنوان" value="{{ title if title else '' }}">
                 </div>
                       <div class="form-group">
                   <label for="slug">نام صفحه</label>
-                  <input type="text" class="form-control" id="slug"  name="slug" placeholder="نام صفحه">
+                  <input type="text" class="form-control" id="slug"  name="slug" placeholder="نام صفحه" value="{{ slug if slug else '' }}">
                 </div>
                        <div class="form-group">
                   <label for="tags">برچسب‌ها</label>
@@ -451,9 +436,9 @@ desired effect
                   <div class="col-md-6">
                  <div class="form-group">
                 <label for="category">تعیین گروه</label>
-                <select class="form-control select2" id="category" name="category" style="width: 100%;">
+                  <select class="form-control select2" id="category" name="category" style="width: 100%;">
                   {% for key, value in catlist.items() %}
-                    <option value="{{value}}">{{key}}</option>
+                    <option value="{{value}}" {% if value == category_value %}selected{% end %}>{{key}}</option>
                     {% end for %}
                 </select>
               </div>
@@ -462,94 +447,79 @@ desired effect
                 <label for="authors"> نویسنده</label>
                 <select class="form-control select2" id="authors" name="authors" style="width: 100%;">
                   {% for user in authors %}
-                    <option value="{{user}}">{{user}}</option>
+                    <option value="{{user}}" {% if user == authors_value %}selected{% end %}>{{user}}</option>
                     {% end for %}
                 </select>
               </div>
                       <div class="form-group">
                   <label for="img_adr">آدرس عکس</label>
-                  <input type="text" class="form-control" id="img_adr" name="img_adr" placeholder="آدرس عکس شاخص">
+                  <input type="text" class="form-control" id="img_adr" name="img_adr" placeholder="آدرس عکس شاخص" value="{{ img_adr if img_adr else '' }}">
                 </div>
 
                       <div class="form-group">
                   <label for="image">تصویر شاخص</label>
-                  <input type="text" class="form-control" id="image" name="image" placeholder="تصویر">
+                  <input type="text" class="form-control" id="image" name="image" placeholder="تصویر" value="{{ image if image else '' }}">
                 </div>
                        <div class="form-group">
                   <label for="img_desc">توصیف عکس</label>
-                  <input type="text" class="form-control" id="img_desc"  name="img_desc" placeholder="توصیف عکس">
+                  <input type="text" class="form-control" id="img_desc"  name="img_desc" placeholder="توصیف عکس" value="{{ img_desc if img_desc else '' }}">
                 </div>
               </div>
 
 <div class="form-group col-md-12" style="margin-top:10px">
-                      <label for="editSection">متن اصلی : </label>
-<div id="editSection" name="editSection" ></div>
+                      <label for="article_editor">متن اصلی : </label>
+<textarea id="article_editor" name="article_editor" class="form-control" rows="12">{{ article if article else '' }}</textarea>
 </div>
 
               </div>
               <!-- /.box-body -->
 
 
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">ارسال</button>
-              </div>
-            </form>
-          </div>
-          <!-- /.box -->
+              <!-- Initialize TinyMCE rich editor and wire form submit -->
+              <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+              <script>
+              tinymce.init({
+                selector: '#article_editor',
+                height: 480,
+                menubar: false,
+                directionality: 'rtl',
+                plugins: [
+                  'advlist','autolink','lists','link','image','charmap','preview','anchor',
+                  'searchreplace','visualblocks','code','fullscreen',
+                  'insertdatetime','media','table','paste','help','wordcount'
+                ],
+                toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                content_style: 'body { font-family: "Helvetica Neue", Helvetica, Arial, "Segoe UI", Tahoma, "Vazir"; font-size:14px }'
+              });
 
+              $(document).ready(function(){
+                 $(function () {
+                  //Initialize Select2 Elements
+                  $('#tags').select2({
+                    tags: true
+                  });
+                  $('#category').select2();
+                  $('#authors').select2();
+                });
 
+                $("#editContent").submit(function(){
+                  // put TinyMCE HTML into hidden article input
+                  var content = tinymce.get('article_editor') ? tinymce.get('article_editor').getContent() : '';
+                  $('#article').val(content);
+                });
 
-        </div>
+                $("#category").change(function() {
+                  $('#img_adr').val("/images/blog/"+$(this).val() + "/"+ $("#year").val()+"/"+$("#month").val()+"/");
+                  $('#cat_name').val($("option:selected", $("#category")).text());
+                });
 
-      </div>
+                $("#tags").change(function() {
+                  $('#tagsvalues').val($(this).val())
+                });
 
+              });
 
-
-
-      <!-- /.row -->
-    </section>
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer text-left">
-    <strong>Copyleft &copy; 2014-2017 <a href="https://adminlte.io">Almsaeed Studio</a> & <a href="http://hosseinizadeh.ir/adminlte">Alireza Hosseinizadeh</a></strong>
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">فعالیت ها</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">تولد غلوم</h4>
-
-                <p>۲۴ مرداد</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">پیشرفت کارها</h3>
+              </script>
         <ul class="control-sidebar-menu">
           <li>
             <a href="javascript:;">
@@ -603,10 +573,10 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 3 -->
-<script src='{{static_url("bower_components/jquery/jquery.min.js")}}'></script>
-<!-- Bootstrap 3.3.7 -->
-<script src='{{static_url("bower_components/bootstrap/js/bootstrap.min.js")}}'></script>
+<!-- jQuery 3 (CDN fallback) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap 5 (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src='{{static_url("js/adminlte.min.js")}}'></script>
 
@@ -617,11 +587,6 @@ desired effect
 <script src='{{static_url("bower_components/codemirror/lib/codemirror.js")}}'></script>
 <script src='{{static_url("bower_components/highlightjs/highlight.pack.min.js")}}'></script>
 <script src='{{static_url("bower_components/squire-rte/build/squire-raw.js")}}'></script>
-<script src='{{static_url("bower_components/tui-editor/dist/tui-editor-Editor.js")}}'></script>
-<script src='{{static_url("bower_components/tui-editor/dist/tui-editor-extScrollSync.js")}}'></script>
-<script src='{{static_url("bower_components/tui-color-picker/dist/tui-color-picker.js")}}'></script>
-<script src='{{static_url("bower_components/tui-editor/dist/tui-editor-extColorSyntax.js")}}'></script>
-<script src='{{static_url("bower_components/tui-editor/dist/tui-editor-extTable.js")}}'></script>
 <script src='{{static_url("bower_components/select2/dist/js/select2.full.min.js")}}'></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

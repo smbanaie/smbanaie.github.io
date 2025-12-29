@@ -1,40 +1,45 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html>
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>صفحه شروع | کنترل پنل</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href='{{static_url("css/bootstrap-theme.css")}}' type="text/css" >
-  <!-- Bootstrap rtl -->
-  <link rel="stylesheet" href='{{static_url("css/rtl.css")}}' type="text/css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href='{{static_url("bower_components/font-awesome/css/font-awesome.min.css")}}' type="text/css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href='{{static_url("bower_components/Ionicons/css/ionicons.min.css")}}' type="text/css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href='{{static_url("css/AdminLTE.css")}}' type="text/css">
-  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href='{{static_url("css/skins/skin-blue.min.css")}}' type="text/css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>کنترل پنل مدیریت</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AdminLTE CSS -->
+  <link rel="stylesheet" href='{{static_url("css/adminlte.min.css")}}'>
+  <!-- RTL Support -->
+  <link rel="stylesheet" href='{{static_url("css/rtl.css")}}'>
+  <!-- Vazir Font -->
+  <style>
+    @font-face {
+      font-family: 'Vazir';
+      src: url('{{static_url("fonts/Vazir-FD-WOL.eot")}}');
+      src: url('{{static_url("fonts/Vazir-FD-WOL.eot?#iefix")}}') format('embedded-opentype'),
+           url('{{static_url("fonts/Vazir-FD-WOL.woff")}}') format('woff'),
+           url('{{static_url("fonts/Vazir-FD-WOL.ttf")}}') format('truetype');
+      font-weight: normal;
+    }
+    @font-face {
+      font-family: 'Vazir';
+      src: url('{{static_url("fonts/Vazir-Bold-FD-WOL.eot")}}');
+      src: url('{{static_url("fonts/Vazir-Bold-FD-WOL.eot?#iefix")}}') format('embedded-opentype'),
+           url('{{static_url("fonts/Vazir-Bold-FD-WOL.woff")}}') format('woff'),
+           url('{{static_url("fonts/Vazir-Bold-FD-WOL.ttf")}}') format('truetype');
+      font-weight: bold;
+    }
+    body, h1, h2, h3, h4, h5, h6, .card-title, .btn, .nav-link, .dropdown-item {
+      font-family: 'Vazir', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    }
+  </style>
+  
+  <!-- Quill.js CSS for rich editor -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -69,257 +74,260 @@ desired effect
       <span class="logo-lg"><b>کنترل پنل مدیریت</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" aria-label="Toggle navigation">
         <span class="sr-only">Toggle navigation</span>
+        <i class="fas fa-bars"></i>
       </a>
 
-
-     
-
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+        <ul class="navbar-nav">
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src='{{static_url("img/user2-160x160.jpg")}}' class="rounded-circle me-2" alt="User Image" style="width: 30px; height: 30px;">
+              <span>علیرضا حسینی زاده</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">۴ پیام خوانده نشده</li>
+              <!-- User image -->
+              <li class="dropdown-header text-center">
+                <img src='{{static_url("img/user2-160x160.jpg")}}' class="rounded-circle mx-auto d-block mb-2" alt="User Image" style="width: 80px; height: 80px;">
+                <h6 class="mb-0">علیرضا حسینی زاده</h6>
+                <small>مدیریت کل سایت</small>
+              </li>
+              <!-- Menu Body -->
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item">
+                <div class="row text-center">
+                  <div class="col-4">
+                    <a href="#" class="text-decoration-none">صفحه من</a>
+                  </div>
+                  <div class="col-4">
+                    <a href="#" class="text-decoration-none">فروش</a>
+                  </div>
+                  <div class="col-4">
+                    <a href="#" class="text-decoration-none">دوستان</a>
+                  </div>
+                </div>
+              </li>
+              <!-- Menu Footer-->
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item d-flex justify-content-between">
+                <a href="#" class="btn btn-outline-secondary btn-sm">پروفایل</a>
+                <a href="#" class="btn btn-outline-danger btn-sm">خروج</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="navbar-custom-menu ms-auto">
+        <ul class="navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-envelope-o"></i>
+              <span class="badge bg-success">4</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><h6 class="dropdown-header">۴ پیام خوانده نشده</h6></li>
               <li>
                 <!-- inner menu: contains the actual data -->
-                <ul class="menu">
+                <ul class="list-unstyled">
                   <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex align-items-center">
+                        <img src='{{static_url("img/user2-160x160.jpg")}}' class="rounded-circle me-2" alt="User Image" style="width: 40px; height: 40px;">
+                        <div>
+                          <h6 class="mb-0">علیرضا</h6>
+                          <small><i class="fa fa-clock-o"></i> ۵ دقیقه پیش</small>
+                          <p class="mb-0">متن پیام</p>
+                        </div>
                       </div>
-                      <h4>
-                        علیرضا
-                        <small><i class="fa fa-clock-o"></i> ۵ دقیقه پیش</small>
-                      </h4>
-                      <p>متن پیام</p>
                     </a>
                   </li>
                   <!-- end message -->
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                  <li><!-- start message -->
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex align-items-center">
+                        <img src='{{static_url("img/user3-128x128.jpg")}}' class="rounded-circle me-2" alt="User Image" style="width: 40px; height: 40px;">
+                        <div>
+                          <h6 class="mb-0">نگین</h6>
+                          <small><i class="fa fa-clock-o"></i> ۲ ساعت پیش</small>
+                          <p class="mb-0">متن پیام</p>
+                        </div>
                       </div>
-                      <h4>
-                        نگین
-                        <small><i class="fa fa-clock-o"></i> ۲ ساعت پیش</small>
-                      </h4>
-                      <p>متن پیام</p>
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                  <!-- end message -->
+                  <li><!-- start message -->
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex align-items-center">
+                        <img src='{{static_url("img/user4-128x128.jpg")}}' class="rounded-circle me-2" alt="User Image" style="width: 40px; height: 40px;">
+                        <div>
+                          <h6 class="mb-0">نسترن</h6>
+                          <small><i class="fa fa-clock-o"></i> امروز</small>
+                          <p class="mb-0">متن پیام</p>
+                        </div>
                       </div>
-                      <h4>
-                        نسترن
-                        <small><i class="fa fa-clock-o"></i> امروز</small>
-                      </h4>
-                      <p>متن پیام</p>
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                  <!-- end message -->
+                  <li><!-- start message -->
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex align-items-center">
+                        <img src='{{static_url("img/user3-128x128.jpg")}}' class="rounded-circle me-2" alt="User Image" style="width: 40px; height: 40px;">
+                        <div>
+                          <h6 class="mb-0">نگین</h6>
+                          <small><i class="fa fa-clock-o"></i> دیروز</small>
+                          <p class="mb-0">متن پیام</p>
+                        </div>
                       </div>
-                      <h4>
-                        نگین
-                        <small><i class="fa fa-clock-o"></i> دیروز</small>
-                      </h4>
-                      <p>متن پیام</p>
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                  <!-- end message -->
+                  <li><!-- start message -->
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex align-items-center">
+                        <img src='{{static_url("img/user4-128x128.jpg")}}' class="rounded-circle me-2" alt="User Image" style="width: 40px; height: 40px;">
+                        <div>
+                          <h6 class="mb-0">نسترن</h6>
+                          <small><i class="fa fa-clock-o"></i> ۲ روز پیش</small>
+                          <p class="mb-0">متن پیام</p>
+                        </div>
                       </div>
-                      <h4>
-                        نسترن
-                        <small><i class="fa fa-clock-o"></i> ۲ روز پیش</small>
-                      </h4>
-                      <p>متن پیام</p>
                     </a>
                   </li>
+                  <!-- end message -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">نمایش تمام پیام ها</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-center" href="#">نمایش تمام پیام ها</a></li>
             </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">۱۰</span>
+              <span class="badge bg-warning">۱۰</span>
             </a>
-            <ul class="dropdown-menu">
-              <li class="header">۱۰ اعلان جدید</li>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><h6 class="dropdown-header">۱۰ اعلان جدید</h6></li>
               <li>
                 <!-- inner menu: contains the actual data -->
-                <ul class="menu">
+                <ul class="list-unstyled">
                   <li>
-                    <a href="#">
+                    <a class="dropdown-item" href="#">
                       <i class="fa fa-users text-aqua"></i> ۵ کاربر جدید ثبت نام کردند
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a class="dropdown-item" href="#">
                       <i class="fa fa-warning text-yellow"></i> اخطار دقت کنید
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a class="dropdown-item" href="#">
                       <i class="fa fa-users text-red"></i> ۴ کاربر جدید ثبت نام کردند
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a class="dropdown-item" href="#">
                       <i class="fa fa-shopping-cart text-green"></i> ۲۵ سفارش جدید
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a class="dropdown-item" href="#">
                       <i class="fa fa-user text-red"></i> نام کاربریتان را تغییر دادید
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="footer"><a href="#">نمایش همه</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-center" href="#">نمایش همه</a></li>
             </ul>
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">۹</span>
+              <span class="badge bg-danger">۹</span>
             </a>
-            <ul class="dropdown-menu">
-              <li class="header">۹ کار برای انجام دارید</li>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><h6 class="dropdown-header">۹ کار برای انجام دارید</h6></li>
               <li>
                 <!-- inner menu: contains the actual data -->
-                <ul class="menu">
+                <ul class="list-unstyled">
                   <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        ساخت دکمه
-                        <small class="pull-right">20%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% تکمیل شده</span>
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h6 class="mb-1">ساخت دکمه</h6>
+                          <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-info" style="width: 20%" role="progressbar"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
                         </div>
+                        <span class="badge bg-info">20%</span>
                       </div>
                     </a>
                   </li>
                   <!-- end task item -->
                   <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        ساخت قالب جدید
-                        <small class="pull-right">40%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">40% تکمیل شده</span>
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h6 class="mb-1">ساخت قالب جدید</h6>
+                          <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-success" style="width: 40%" role="progressbar"
+                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
                         </div>
+                        <span class="badge bg-success">40%</span>
                       </div>
                     </a>
                   </li>
                   <!-- end task item -->
                   <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        تبلیغات
-                        <small class="pull-right">60%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">60% تکمیل شده</span>
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h6 class="mb-1">تبلیغات</h6>
+                          <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-danger" style="width: 60%" role="progressbar"
+                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
                         </div>
+                        <span class="badge bg-danger">60%</span>
                       </div>
                     </a>
                   </li>
                   <!-- end task item -->
                   <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        ساخت صفحه فرود
-                        <small class="pull-right">80%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">80% تکمیل شده</span>
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h6 class="mb-1">ساخت صفحه فرود</h6>
+                          <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-warning" style="width: 80%" role="progressbar"
+                                 aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
                         </div>
+                        <span class="badge bg-warning">80%</span>
                       </div>
                     </a>
                   </li>
                   <!-- end task item -->
                 </ul>
               </li>
-              <li class="footer">
-                <a href="#">نمایش همه</a>
-              </li>
-            </ul>
-          </li>
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">علیرضا حسینی زاده</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  <small>مدیریت کل سایت</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">صفحه من</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">فروش</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">دوستان</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">پروفایل</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">خروج</a>
-                </div>
-              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-center" href="#">نمایش همه</a></li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
       </div>
@@ -332,49 +340,17 @@ desired effect
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-right image">
-          <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-right info">
-          <p>علیرضا حسینی زاده</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
-        </div>
-      </div>
 
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="جستجو">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
+          <button type="submit" name="search" id="search-btn" class="btn btn-outline-secondary"><i class="fa fa-search"></i></button>
         </div>
       </form>
       <!-- /.search form -->
 
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">تیتر</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="/posts/add"><i class="fa fa-link"></i> <span>افزودن مطلب جدید</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>لینک ۲</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>چند سطحی</span>
-            <span class="pull-left-container">
-                <i class="fa fa-angle-right pull-left"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">لینک سطح ۱</a></li>
-            <li><a href="#">لینک سطح ۱</a></li>
-          </ul>
-        </li>
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
+      </section>
     <!-- /.sidebar -->
   </aside>
 
@@ -395,93 +371,389 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+      <!-- Dashboard Stats -->
+      <div class="row">
+        <div class="col-lg-3 col-sm-6">
+          <!-- Card -->
+          <div class="card bg-primary text-white">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h4>{{ stats.get('total_posts', 0) if stats else 0 }}</h4>
+                  <p class="mb-0">تعداد مطالب</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="fas fa-newspaper fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <a href="/admin/posts" class="text-white text-decoration-none">
+                مشاهده جزئیات <i class="fas fa-arrow-circle-left"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-sm-6">
+          <!-- Card -->
+          <div class="card bg-success text-white">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h4>{{ stats.get('total_categories', 0) if stats else 0 }}</h4>
+                  <p class="mb-0">تعداد دسته‌بندی‌ها</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="fas fa-tags fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <a href="/admin/categories" class="text-white text-decoration-none">
+                مشاهده جزئیات <i class="fas fa-arrow-circle-left"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-sm-6">
+          <!-- Card -->
+          <div class="card bg-warning text-white">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h4>{{ stats.get('total_authors', 0) if stats else 0 }}</h4>
+                  <p class="mb-0">مدیریت کاربران</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="fas fa-users fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <a href="/admin/users" class="text-white text-decoration-none">
+                مشاهده جزئیات <i class="fas fa-arrow-circle-left"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-sm-6">
+          <!-- Card -->
+          <div class="card bg-danger text-white">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h4>{{ date[:10] if date else "N/A" }}</h4>
+                  <p class="mb-0">تاریخ سیستم</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="fas fa-calendar-alt fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <a href="/admin/settings" class="text-white text-decoration-none">
+                تنظیمات <i class="fas fa-arrow-circle-left"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- Recent Posts -->
+      <div class="row mt-4">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">آخرین مطالب</h5>
+              <a href="/admin/posts" class="btn btn-primary btn-sm">مشاهده همه</a>
+            </div>
+            <div class="card-body">
+              {% if stats and stats.get('recent_posts') %}
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان</th>
+                      <th>دسته‌بندی</th>
+                      <th>نویسنده</th>
+                      <th>تاریخ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for post in stats.get('recent_posts', []) %}
+                    <tr>
+                      <td>{{ post.get('title', '') }}</td>
+                      <td><span class="badge bg-primary">{{ post.get('category', '') }}</span></td>
+                      <td>{{ post.get('author', '') }}</td>
+                      <td>{{ post.get('date', '') }}</td>
+                    </tr>
+                    {% end %}
+                  </tbody>
+                </table>
+              </div>
+              {% else %}
+              <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                هیچ مطلبی یافت نشد.
+              </div>
+              {% end %}
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <!-- Posts by Category -->
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0">مطالب بر اساس دسته‌بندی</h5>
+            </div>
+            <div class="card-body">
+              {% if stats and stats.get('posts_by_category') %}
+              {% for category, count in stats.get('posts_by_category', {}).items() %}
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span>{{ category }}</span>
+                <span class="badge bg-primary">{{ count }}</span>
+              </div>
+              <div class="progress mb-3">
+                <div class="progress-bar bg-primary" style="width: {{ (count / stats.get('total_posts', 1) * 100) if stats.get('total_posts', 0) > 0 else 0 }}%"></div>
+              </div>
+              {% end %}
+              {% else %}
+              <div class="text-center text-muted">
+                <i class="fas fa-chart-pie fa-2x"></i>
+                <p class="mt-2">داده‌ای برای نمایش وجود ندارد</p>
+              </div>
+              {% end %}
+            </div>
+          </div>
+        </div>
+      </div>
 
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 
+  <!-- Maintenance Actions -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">عملیات نگهداری سیستم</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-sync-alt fa-2x text-primary mb-3"></i>
+                      <h5>بازسازی آمار و شمارش‌ها</h5>
+                      <p class="text-muted">بازنشانی و بازسازی تمام آمارها، شمارش مطالب و دسته‌بندی‌ها</p>
+                      <button type="button" class="btn btn-primary" id="recalculateStatsBtn">
+                        <i class="fas fa-calculator"></i> بازسازی آمار
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-database fa-2x text-success mb-3"></i>
+                      <h5>پشتیبان‌گیری</h5>
+                      <p class="text-muted">ایجاد پشتیبان از تنظیمات و داده‌ها</p>
+                      <button type="button" class="btn btn-success" id="backupBtn">
+                        <i class="fas fa-download"></i> پشتیبان‌گیری
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card bg-warning">
+                    <div class="card-body text-center">
+                      <i class="fas fa-cog fa-2x text-white mb-3"></i>
+                      <h5 class="text-white">تولید سایت</h5>
+                      <p class="text-white-50">تولید و ساخت کامل سایت پالیکان</p>
+                      <button type="button" class="btn btn-light" id="generateSiteBtn">
+                        <i class="fas fa-play"></i> تولید سایت
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-md-6">
+                  <div class="card bg-info">
+                    <div class="card-body text-center">
+                      <i class="fas fa-search fa-2x text-white mb-3"></i>
+                      <h5 class="text-white">بررسی سازگاری دسته‌بندی‌ها</h5>
+                      <p class="text-white-50">بررسی ناهماهنگی بین فایل‌ها، پوشه‌ها و تنظیمات</p>
+                      <a href="/admin/category-consistency" class="btn btn-light">
+                        <i class="fas fa-search"></i> مشاهده گزارش
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recalculate Stats Modal -->
+  <div class="modal fade" id="recalculateModal" tabindex="-1" aria-labelledby="recalculateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="recalculateModalLabel">بازسازی آمار</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>هشدار:</strong> آیا مطمئن هستید که می‌خواهید تمام آمارها را بازسازی کنید؟ این عملیات ممکن است کمی زمان ببرد.
+          </div>
+          <p>این عملیات تمام شمارش‌ها شامل:</p>
+          <ul>
+            <li>تعداد مقالات در هر دسته‌بندی</li>
+            <li>تعداد مقالات هر نویسنده</li>
+            <li>آمار کلی داشبورد</li>
+          </ul>
+          <p>را بازسازی خواهد کرد.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
+          <button type="button" class="btn btn-primary" id="confirmRecalculateBtn">
+            <i class="fas fa-sync-alt"></i> بازسازی آمار
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">موفقیت</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i>
+            <div id="successMessage"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">بستن</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backup Modal -->
+  <div class="modal fade" id="backupModal" tabindex="-1" aria-labelledby="backupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="backupModalLabel">پشتیبان‌گیری</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i>
+            <strong>توجه:</strong> آیا مطمئن هستید که می‌خواهید پشتیبان تهیه کنید؟
+          </div>
+          <p>این عملیات یک کپی از فایل تنظیمات ایجاد خواهد کرد.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
+          <button type="button" class="btn btn-success" id="confirmBackupBtn">
+            <i class="fas fa-download"></i> پشتیبان‌گیری
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generate Site Modal -->
+  <div class="modal fade" id="generateSiteModal" tabindex="-1" aria-labelledby="generateSiteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="generateSiteModalLabel">تولید سایت</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>هشدار:</strong> آیا مطمئن هستید که می‌خواهید سایت را تولید کنید؟
+          </div>
+          <p>این عملیات سایت پالیکان را از روی فایل‌های محتوا تولید خواهد کرد.</p>
+          <div class="mb-3">
+            <label class="form-label">نوع تولید:</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="buildType" id="buildLocal" value="build" checked>
+              <label class="form-check-label" for="buildLocal">
+                تولید محلی (پیش‌نمایش)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="buildType" id="buildProduction" value="preview">
+              <label class="form-check-label" for="buildProduction">
+                تولید نهایی (انتشار)
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
+          <button type="button" class="btn btn-warning" id="confirmGenerateBtn">
+            <i class="fas fa-play"></i> تولید سایت
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">خطا</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div id="errorMessage"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Main Footer -->
-  <footer class="main-footer text-left">
-    <strong>Copyleft &copy; 2014-2017 <a href="https://adminlte.io">Almsaeed Studio</a> & <a href="http://hosseinizadeh.ir/adminlte">Alireza Hosseinizadeh</a></strong>
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-inline">
+      <b>نسخه</b> 1.0.0
+    </div>
+    <strong>کنترل پنل مدیریت</strong>
   </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">فعالیت ها</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">تولد غلوم</h4>
-
-                <p>۲۴ مرداد</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">پیشرفت کارها</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <h4 class="control-sidebar-subheading">
-                آپدیت لاراول
-                <span class="pull-left-container">
-                    <span class="label label-danger pull-left">70%</span>
-                  </span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">تب وضعیت</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">تنظیمات عمومی</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              گزارش کنترلر پنل
-              <input type="checkbox" class="pull-left" checked>
-            </label>
-
-            <p>
-              ثبت تمامی فعالیت های مدیران
-            </p>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
@@ -490,15 +762,171 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 3 -->
-<script src='{{static_url("bower_components/jquery/jquery.min.js")}}'></script>
-<!-- Bootstrap 3.3.7 -->
-<script src='{{static_url("bower_components/bootstrap/js/bootstrap.min.js")}}'></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src='{{static_url("js/adminlte.min.js")}}'></script>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
+<!-- Dashboard Actions -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Recalculate Stats Button
+    document.getElementById('recalculateStatsBtn').addEventListener('click', function() {
+        // Show confirmation modal instead of alert
+        new bootstrap.Modal(document.getElementById('recalculateModal')).show();
+    });
+
+    // Confirm Recalculate Button
+    document.getElementById('confirmRecalculateBtn').addEventListener('click', function() {
+        // Hide modal
+        bootstrap.Modal.getInstance(document.getElementById('recalculateModal')).hide();
+
+        // Show loading state on main button
+        const mainBtn = document.getElementById('recalculateStatsBtn');
+        const originalText = mainBtn.innerHTML;
+        mainBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال بازسازی...';
+        mainBtn.disabled = true;
+
+        // Send request
+        fetch('/admin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'action=recalculate_stats'
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes('successfully') || data.includes('بازسازی')) {
+                // Show success message and reload
+                document.getElementById('successMessage').textContent = 'آمار با موفقیت بازسازی شد';
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+
+                // Reload after modal is shown
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            } else {
+                // Show error modal
+                document.getElementById('errorMessage').textContent = data;
+                new bootstrap.Modal(document.getElementById('errorModal')).show();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('errorMessage').textContent = 'خطا در ارتباط با سرور';
+            new bootstrap.Modal(document.getElementById('errorModal')).show();
+        })
+        .finally(() => {
+            // Restore button state
+            mainBtn.innerHTML = originalText;
+            mainBtn.disabled = false;
+        });
+    });
+
+    // Backup Button
+    document.getElementById('backupBtn').addEventListener('click', function() {
+        // Show confirmation modal instead of alert
+        new bootstrap.Modal(document.getElementById('backupModal')).show();
+    });
+
+    // Confirm Backup Button
+    document.getElementById('confirmBackupBtn').addEventListener('click', function() {
+        // Hide modal
+        bootstrap.Modal.getInstance(document.getElementById('backupModal')).hide();
+
+        // Show loading state on main button
+        const mainBtn = document.getElementById('backupBtn');
+        const originalText = mainBtn.innerHTML;
+        mainBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال پشتیبان‌گیری...';
+        mainBtn.disabled = true;
+
+        // Send request
+        fetch('/admin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'action=backup'
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes('successfully') || data.includes('پشتیبان')) {
+                document.getElementById('successMessage').textContent = 'پشتیبان با موفقیت ایجاد شد';
+                new bootstrap.Modal(document.getElementById('successModal')).show();
+            } else {
+                document.getElementById('errorMessage').textContent = data;
+                new bootstrap.Modal(document.getElementById('errorModal')).show();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('errorMessage').textContent = 'خطا در ارتباط با سرور';
+            new bootstrap.Modal(document.getElementById('errorModal')).show();
+        })
+        .finally(() => {
+            // Restore button state
+            mainBtn.innerHTML = originalText;
+            mainBtn.disabled = false;
+        });
+    });
+
+    // Generate Site Button
+    document.getElementById('generateSiteBtn').addEventListener('click', function() {
+        new bootstrap.Modal(document.getElementById('generateSiteModal')).show();
+    });
+
+    // Confirm Generate Site Button
+    document.getElementById('confirmGenerateBtn').addEventListener('click', function() {
+        // Hide modal
+        bootstrap.Modal.getInstance(document.getElementById('generateSiteModal')).hide();
+
+        // Get selected build type
+        const buildType = document.querySelector('input[name="buildType"]:checked').value;
+
+        // Show loading state on main button
+        const mainBtn = document.getElementById('generateSiteBtn');
+        const originalText = mainBtn.innerHTML;
+        mainBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال تولید...';
+        mainBtn.disabled = true;
+
+        // Send request
+        fetch('/admin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'action=generate_site&build_type=' + buildType
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes('successfully') || data.includes('موفقیت') || data.includes('تولید')) {
+                document.getElementById('successMessage').textContent = 'سایت با موفقیت تولید شد';
+                new bootstrap.Modal(document.getElementById('successModal')).show();
+            } else {
+                document.getElementById('errorMessage').textContent = data;
+                new bootstrap.Modal(document.getElementById('errorModal')).show();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('errorMessage').textContent = 'خطا در ارتباط با سرور';
+            new bootstrap.Modal(document.getElementById('errorModal')).show();
+        })
+        .finally(() => {
+            // Restore button state
+            mainBtn.innerHTML = originalText;
+            mainBtn.disabled = false;
+        });
+    });
+});
+</script>
+
+<!-- Optionally, you can add additional plugins here. -->
 </body>
 </html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}کنترل پنل مدیریت{% end %}</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- SimpleMDE CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplemde@1.11.2/dist/simplemde.min.css">
+  
+  <!-- AdminLTE CSS -->
+  <link rel="stylesheet" href='{{static_url("css/AdminLTE.css")}}'>
+  <!-- RTL Support -->
+  <link rel="stylesheet" href='{{static_url("css/rtl.css")}}'>
+  
+  {% block extra_css %}{% end %}
+</head>
+<body class="bg-light">
+  <div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/admin">
+            <i class="fas fa-cog"></i> کنترل پنل مدیریت
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/posts/add">
+                  <i class="fas fa-plus"></i> افزودن مطلب
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/posts">
+                  <i class="fas fa-list"></i> لیست مطالب
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/categories">
+                  <i class="fas fa-tags"></i> دسته‌بندی‌ها
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users">
+                  <i class="fas fa-users"></i> کاربران
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/settings">
+                  <i class="fas fa-cog"></i> تنظیمات
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">
+          <i class="fas fa-bars"></i> منوی اصلی
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body p-0">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/admin">
+              <i class="fas fa-tachometer-alt"></i> داشبورد
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/admin/posts/add">
+              <i class="fas fa-plus"></i> افزودن مطلب جدید
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/admin/posts">
+              <i class="fas fa-list"></i> لیست مطالب
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/admin/categories">
+              <i class="fas fa-tags"></i> مدیریت دسته‌بندی‌ها
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/admin/users">
+              <i class="fas fa-users"></i> مدیریت کاربران
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/admin/settings">
+              <i class="fas fa-cog"></i> تنظیمات سایت
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <section class="content container-fluid">
+        {% block content %}{% end %}
+      </section>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="main-footer text-center bg-light py-3 border-top">
+      <strong>کنترل پنل مدیریت</strong>
+    </footer>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- AdminLTE App -->
+  <script src='{{static_url("js/adminlte.min.js")}}'></script>
+  
+  <!-- SimpleMDE JS -->
+  <script src="https://cdn.jsdelivr.net/npm/simplemde@1.11.2/dist/simplemde.min.js"></script>
+  
+  {% block extra_js %}{% end %}
+</body>
+</html>
