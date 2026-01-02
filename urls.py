@@ -6,6 +6,7 @@ from handlers import (
     categories_Handler,
     category_consistency_Handler,
     add_new_post_Handler,
+    admin_add_post_Handler,
     posts_list_Handler,
     edit_post_Handler,
     users_Handler,
@@ -15,6 +16,7 @@ from handlers import (
 
 urlList  = [
     (r'/admin/posts', posts_list_Handler),
+    (r'/admin/posts/add', admin_add_post_Handler),
     (r'/admin/posts/edit', edit_post_Handler),
     (r'/admin/categories', categories_Handler),
     (r'/admin/category-consistency', category_consistency_Handler),

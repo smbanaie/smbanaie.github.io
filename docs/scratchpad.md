@@ -112,112 +112,136 @@
 
 The modern admin panel foundation is complete and ready for use. The next phase will add advanced management features.
 
-## Phase 4: Enhanced User/Category Management
+# Image Upload Feature Implementation Plan
 
-### 1. Fix Article Count Display
-- [ ] Implement proper article counting for users and categories
-- [ ] Replace "در حال محاسبه..." with actual counts
-- [ ] Add database/file scanning to count articles by author/category
+## Overview
+Implement a comprehensive image upload feature for the admin panel that allows users to upload images directly instead of manually entering image paths. The system will use a temporary folder for uploads and automatically move images to the appropriate target folder when articles are saved.
 
-### 2. Update Userconf Structure
-- [ ] Add default user and category fields to userconf.py
-- [ ] Add status (active/inactive) for users and categories
-- [ ] Update data loading/parsing to handle new fields
+## Technical Requirements
 
-### 3. Enhance Category Deletion
-- [ ] Add confirmation dialog for category deletion
-- [ ] Provide options: keep old category, replace with new, replace with default
-- [ ] Implement article migration logic for deleted categories
+### 1. Temporary Image Storage
+- Create temp folder: `user_area/smbanaie/smbanaie/images/temp`
+- Store uploaded images temporarily before article save
+- Clean up temp images after successful save or timeout
 
-### 4. Update Add/Edit Forms
-- [ ] Add default checkbox/radio for users and categories
-- [ ] Add status (active/inactive) selector
-- [ ] Update form validation for new fields
+### 2. Target Image Organization
+- Move images to appropriate folders in `images/` directory based on article category/date
+- Maintain existing image organization structure
+- Handle image naming and path updates in article metadata
 
-### 5. Update List Views
-- [ ] Show default status in user/category lists
-- [ ] Show active/inactive status with badges
-- [ ] Update table columns and styling
+### 3. Integration Points
+- Add image upload to both Add Article and Edit Article forms
+- Update article saving logic to handle image movement
+- Maintain backward compatibility with existing image paths
 
-### 6. Implement Status Logic
-- [x] Prevent deletion of default users/categories with helpful error messages
-- [ ] Handle inactive users/categories in article creation
-- [x] Add status filtering in lists
+## Implementation Phases
 
-### 7. Update Data Persistence
-- [ ] Modify _write_userconf_data to handle new fields
-- [ ] Ensure backward compatibility with existing data
-- [ ] Add validation for default user/category constraints
+### Phase 1: Backend Infrastructure
 
-### 8. Frontend Enhancements
-- [ ] Add confirmation dialogs for category deletion with migration options
-- [ ] Update JavaScript for new form fields
-- [ ] Add visual indicators for default and status fields
+#### 1.1 Create Image Upload Handler
+- [ ] Create new handler for image upload endpoints
+- [ ] Implement file upload validation (size, type, security)
+- [ ] Add temporary file storage logic
+- [ ] Implement image cleanup mechanisms
+
+#### 1.2 Update Article Handlers
+- [ ] Modify add_article handler to process uploaded images
+- [ ] Modify edit_article handler to handle image updates
+- [ ] Add image path generation logic
+- [ ] Implement image movement from temp to target folder
+
+#### 1.3 File System Management
+- [ ] Create temp directory structure if not exists
+- [ ] Implement secure file naming (UUID or timestamp-based)
+- [ ] Add image validation and security checks
+- [ ] Create cleanup utilities for temp files
+
+### Phase 2: Frontend Implementation
+
+#### 2.1 Update Article Forms
+- [ ] Add drag-and-drop image upload area to Add Article form
+- [ ] Add image upload area to Edit Article form
+- [ ] Implement image preview functionality
+- [ ] Add progress indicators for uploads
+
+#### 2.2 JavaScript Integration
+- [ ] Create image upload JavaScript module
+- [ ] Implement drag-and-drop functionality
+- [ ] Add image preview and management UI
+- [ ] Handle upload progress and error states
+
+#### 2.3 Form Validation
+- [ ] Add client-side image validation
+- [ ] Implement file size and type restrictions
+- [ ] Add error handling for upload failures
+- [ ] Validate image paths in article metadata
+
+### Phase 3: Integration and Polish
+
+#### 3.1 Article Saving Logic
+- [ ] Update article save process to handle image movement
+- [ ] Implement rollback on save failures
+- [ ] Add image path updates to article metadata
+- [ ] Ensure atomic operations for article + image saves
+
+#### 3.2 Edit Article Enhancement
+- [ ] Show current article images in edit form
+- [ ] Allow image replacement in edit mode
+- [ ] Handle image deletion from articles
+- [ ] Maintain image references during edits
+
+#### 3.3 User Experience
+- [ ] Add loading states during image processing
+- [ ] Implement success/error feedback
+- [ ] Add image management in article preview
+- [ ] Ensure responsive design for mobile devices
+
+## Technical Specifications
+
+### File Structure
+```
+user_area/smbanaie/smbanaie/
+├── images/
+│   ├── temp/           # Temporary upload storage
+│   ├── articles/       # Article images (existing)
+│   └── [category]/     # Category-specific folders
+└── handlers/
+    ├── image_upload.py # New image upload handler
+    └── admin/
+        ├── posts.py    # Updated with image handling
+        └── dashboard.py # Image management utilities
+```
+
+### Image Upload API Endpoints
+- `POST /admin/upload-image` - Upload single image to temp folder
+- `POST /admin/delete-temp-image` - Delete temporary image
+- `GET /admin/temp-images` - List temporary images for session
+
+### Security Considerations
+- File type validation (only allow image formats)
+- File size limits
+- Secure file naming to prevent path traversal
+- Temporary file cleanup to prevent disk space issues
+- CSRF protection for upload endpoints
+
+### Image Processing
+- Maintain original image quality
+- Generate appropriate file names based on article metadata
+- Handle image path updates in Markdown content
+- Support multiple image uploads per article
 
 ## Implementation Order
 
-1. **Task 1**: Fix article count display
-2. **Task 2**: Update userconf structure and data handling
-3. **Task 3**: Enhance category deletion with migration options
-4. **Task 4**: Update forms with default and status fields
-5. **Task 5**: Update list views with new columns
-6. **Task 6**: Implement status logic and constraints
-7. **Task 7**: Update data persistence and validation
-8. **Task 8**: Frontend enhancements and polish
+1. **Backend Infrastructure** (Handlers and file management)
+2. **Frontend Upload Interface** (Forms and JavaScript)
+3. **Integration** (Article save/edit logic)
+4. **Polish** (Error handling, UX improvements)
 
-## Technical Notes
+## Success Criteria
 
-- Default user/category should be unique (only one can be default)
-- Status affects availability in dropdowns and forms
-- Category migration requires scanning all articles and updating metadata
-- Article count requires scanning content directory for posts
-- All changes must maintain backward compatibility
-
-## New Tasks to Complete
-
-### Task 1: Fix Meditation Category Count Issue
-- [ ] The Meditation category in category list page has 0 count but it has some articles
-- [ ] Investigate why article count is not updating correctly
-- [ ] Fix the counting logic for categories
-
-### Task 2: Fix Recalculate Endpoint Error
-- [ ] The recalculate endpoint has error
-- [ ] Investigate the error and fix it
-- [ ] Ensure recalculate functionality works properly
-
-### Task 3: Enforce English Technical Names
-- [ ] The technical name for users / categories must be in English
-- [ ] If user updates or inserts a new one with non English names, have to be rejected with proper modal message
-- [ ] Add validation to reject non-English technical names
-- [ ] Display proper error modal when validation fails
-
-### Task 4: Fix User List Page Edit/Delete Buttons
-- [ ] The user list page has error - the edit/delete button is not working
-- [ ] Nothing shows when clicking on each button
-- [ ] Investigate and fix the JavaScript/event handling
-- [ ] Ensure edit and delete functionality works properly
-
-### Task 5: Verify Article Saving Location
-- [ ] When we add new article, it must saved on the pelican folder in user_area
-- [ ] Confirm this happens correctly
-- [ ] Check the article saving logic and file paths
-
-### Task 6: Add Pelican Site Generation Feature
-- [ ] How to generate the whole pelican content site in admin panel?
-- [ ] Add functionality to generate complete Pelican site
-- [ ] Create admin panel interface for site generation
-
-### Task 7: Add Comprehensive Tests
-- [ ] Add all tests using the provided APIs
-- [ ] Create test suite covering all endpoints
-- [ ] Ensure proper test coverage for all functionality
-
-### Task 8: Fix Backup Action Error
-- [ ] Why backup action in dashboard has error
-- [ ] Investigate the backup functionality error
-- [ ] Fix the backup action to work properly
-
-### Task 9: Remove All Test Users
-- [ ] Remove all test users from the system
-- [ ] Clean up test data
-- [ ] Ensure no test users remain in userconf.py
+- Users can upload images directly in article forms
+- Images are automatically organized in appropriate folders
+- Temporary files are cleaned up properly
+- Existing image paths continue to work
+- Upload process is intuitive and user-friendly
+- System handles errors gracefully with clear feedback

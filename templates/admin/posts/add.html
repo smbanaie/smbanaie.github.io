@@ -29,10 +29,17 @@
                         <h3 class="card-title">{{ "ویرایش مطلب" if edit_mode else "افزودن مطلب جدید" }}</h3>
                         <div class="card-tools">
                             {% if edit_mode %}
-                            <a href="/admin/posts" class="btn btn-secondary btn-sm">
+                            <a href="/admin/posts" class="btn btn-secondary btn-sm me-2">
                                 <i class="fas fa-arrow-left"></i> بازگشت به لیست
                             </a>
+                            {% else %}
+                            <a href="/admin" class="btn btn-secondary btn-sm me-2">
+                                <i class="fas fa-arrow-left"></i> بازگشت به داشبورد
+                            </a>
                             {% end %}
+                            <a href="/admin/posts" class="btn btn-info btn-sm">
+                                <i class="fas fa-list"></i> لیست مطالب
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -134,8 +141,26 @@
                                         
                                         <div class="mb-3">
                                             <label for="image" class="form-label">تصویر شاخص</label>
-                                            <input type="file" class="form-control" id="image" name="image">
-                                            <div class="form-text">فرمت‌های پشتیبانی شده: JPG, PNG, GIF</div>
+                                            <div id="imageUploadArea" class="border rounded p-3 text-center" style="border-style: dashed; cursor: pointer;">
+                                                <div id="imageUploadContent">
+                                                    <i class="fas fa-cloud-upload-alt fa-2x text-muted mb-2"></i>
+                                                    <p class="text-muted mb-2">فایل تصویر را اینجا بکشید و رها کنید</p>
+                                                    <p class="text-muted mb-3">یا</p>
+                                                    <input type="file" class="form-control" id="image" name="image" accept="image/*" style="display: none;">
+                                                    <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('image').click()">
+                                                        <i class="fas fa-folder-open"></i> انتخاب فایل
+                                                    </button>
+                                                </div>
+                                                <div id="imagePreview" class="mt-3" style="display: none;">
+                                                    <img id="previewImage" src="" class="img-fluid rounded" style="max-height: 200px;">
+                                                    <div class="mt-2">
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="removeImage()">
+                                                            <i class="fas fa-trash"></i> حذف تصویر
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-text">فرمت‌های پشتیبانی شده: JPG, PNG, GIF, WebP (حداکثر 5MB)</div>
                                         </div>
                                         
                                         <div class="mb-3">
@@ -146,11 +171,15 @@
                                         </div>
                                         
                                         <div class="mb-3">
-                                            <label for="img_adr" class="form-label">مسیر تصویر</label>
+                                            <label for="img_adr" class="form-label">مسیر تصویر (اختیاری)</label>
                                             <input type="text" class="form-control" id="img_adr" name="img_adr" 
                                                    value="{{ img_adr if img_adr else '' }}" 
                                                    placeholder="/images/blog/category/year/month/">
+                                            <div class="form-text">اگر تصویر را آپلود کنید، این فیلد نادیده گرفته می‌شود</div>
                                         </div>
+                                        
+                                        <!-- Hidden field to store uploaded image filename -->
+                                        <input type="hidden" id="uploaded_image_filename" name="uploaded_image_filename" value="">
                                     </div>
                                 </div>
                                 
@@ -252,12 +281,35 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Set initial content if editing
     {% if article %}
-    simplemde.value(`{{ article.replace('\n', '\\n').replace('\r', '\\r').replace('"', '\\"') }}`);
+    const initialContent = `{{ article.replace('\n', '\\n').replace('\r', '\\r').replace('"', '\\"') }}`;
+    simplemde.value(initialContent);
     {% end %}
     
     // Form submission handler
     document.getElementById('postForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        // Validate form fields
+        const title = document.getElementById('title').value.trim();
+        const slug = document.getElementById('slug').value.trim();
+        const category = document.getElementById('category').value;
+        const authors = document.getElementById('authors').value;
+        const article = simplemde.value().trim();
+        
+        if (!title || !slug || !category || !authors || !article) {
+            alert('لطفاً تمام فیلدهای اجباری را پر کنید');
+            return;
+        }
+        
+        // Validate image if provided
+        const uploadedImageFilename = document.getElementById('uploaded_image_filename').value;
+        const manualImageFilename = document.getElementById('image').value;
+        const imgAdr = document.getElementById('img_adr').value.trim();
+        
+        if (!uploadedImageFilename && manualImageFilename && !imgAdr) {
+            alert('اگر مسیر تصویر را به صورت دستی وارد می‌کنید، لطفاً مسیر تصویر را نیز مشخص کنید');
+            return;
+        }
         
         // Get form data
         const formData = new FormData(this);
@@ -328,6 +380,134 @@ document.addEventListener('DOMContentLoaded', function() {
         const month = document.getElementById('month').value;
         if (category && year && month) {
             document.getElementById('img_adr').value = `/images/blog/${category}/${year}/${month}/`;
+        }
+    }
+
+    // Image Upload Functionality
+    const imageUploadArea = document.getElementById('imageUploadArea');
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImage = document.getElementById('previewImage');
+    const imageUploadContent = document.getElementById('imageUploadContent');
+    const uploadedImageFilename = document.getElementById('uploaded_image_filename');
+
+    // Drag and drop functionality
+    imageUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        imageUploadArea.style.borderColor = '#007bff';
+        imageUploadArea.style.backgroundColor = '#f8f9fa';
+    });
+
+    imageUploadArea.addEventListener('dragleave', () => {
+        imageUploadArea.style.borderColor = '#dee2e6';
+        imageUploadArea.style.backgroundColor = 'white';
+    });
+
+    imageUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        imageUploadArea.style.borderColor = '#dee2e6';
+        imageUploadArea.style.backgroundColor = 'white';
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleImageUpload(files[0]);
+        }
+    });
+
+    // File input change
+    imageInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            handleImageUpload(file);
+        }
+    });
+
+    function handleImageUpload(file) {
+        // Validate file type
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+        if (!allowedTypes.includes(file.type)) {
+            alert('فرمت فایل نامعتبر است. لطفاً فقط فایل‌های JPG, PNG, GIF یا WebP انتخاب کنید');
+            return;
+        }
+
+        // Validate file size (5MB limit)
+        if (file.size > 5 * 1024 * 1024) {
+            alert('حجم فایل نباید بیشتر از 5MB باشد');
+            return;
+        }
+
+        // Validate filename
+        const filename = file.name.toLowerCase();
+        const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+        const fileExtension = filename.substring(filename.lastIndexOf('.'));
+        if (!allowedExtensions.includes(fileExtension)) {
+            alert('پسوند فایل نامعتبر است. لطفاً فقط فایل‌های با پسوند JPG, PNG, GIF یا WebP انتخاب کنید');
+            return;
+        }
+
+        // Show preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            imagePreview.style.display = 'block';
+            imageUploadContent.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+
+        // Upload image
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('action', 'upload');
+
+        fetch('/admin/upload-image', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                uploadedImageFilename.value = data.file.filename;
+                // Clear the manual image path since we're using uploaded image
+                document.getElementById('img_adr').value = '';
+                document.getElementById('image').value = '';
+            } else {
+                alert('خطا در آپلود تصویر: ' + data.error);
+                removeImage();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('خطا در آپلود تصویر');
+            removeImage();
+        });
+    }
+
+    function removeImage() {
+        // Remove preview
+        imagePreview.style.display = 'none';
+        imageUploadContent.style.display = 'block';
+        previewImage.src = '';
+        
+        // Clear hidden field
+        uploadedImageFilename.value = '';
+        
+        // If there was a temp image, delete it
+        const filename = uploadedImageFilename.value;
+        if (filename) {
+            fetch('/admin/upload-image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=delete&filename=' + encodeURIComponent(filename)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Temp image deleted:', data);
+            })
+            .catch(error => {
+                console.error('Error deleting temp image:', error);
+            });
         }
     }
 });
