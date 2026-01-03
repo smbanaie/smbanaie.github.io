@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-13075446-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-13075446-1');
+</script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ردیس (Redis)  بانک اطلاعاتی NoSQL مقیم در حافظه</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="author" content="مجتبی بنائی" />
+    <meta name="description" content="ردیس (Redis) بانک اطلاعاتی NoSQL مقیم در حافظه" />
+    <meta name="keywords" content="تخصصی‌نرم‌افزار, تجربیات, تخصصی, ردیس, کاساندرا">
+<!-- Facebook and Twitter integration -->
+<meta property="og:site_name" content="سایت شخصی سید مجتبی بنائی"/>
+<meta property="og:title" content="ردیس (Redis) بانک اطلاعاتی NoSQL مقیم در حافظه"/>
+<meta property="og:description" content="ردیس (Redis) بانک اطلاعاتی NoSQL مقیم در حافظه"/>
+<meta property="og:url" content="https://banaie.ir/blog/2013/10/ردیس-(Redis)-بانک-اطلاعاتی-NoSQL-مقیم-در-حافظه.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2013-10-15 00:00:00+03:30"/>
+<meta property="article:modified_time" content="2018-08-01 00:00:00+04:30"/>
+<meta property="article:author" content="https://banaie.ir/author/mjtby-bnyy.html">
+<meta property="article:section" content="تخصصی"/>
+    <meta property="article:tag" content="تخصصی‌نرم‌افزار"/>
+    <meta property="article:tag" content="تجربیات"/>
+    <meta property="article:tag" content="تخصصی"/>
+    <meta property="article:tag" content="ردیس"/>
+    <meta property="article:tag" content="کاساندرا"/>
+    <meta property="og:image" content="https://banaie.ir//images/static/diary.jpg">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://banaie.ir/theme/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="https://banaie.ir/theme/css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="https://banaie.ir/theme/css/bootstrap.css">
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="https://banaie.ir/theme/css/flexslider.css">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="https://banaie.ir/theme/css/style.css">
+    <!-- Custom style  -->
+    <link rel="stylesheet" href="https://banaie.ir/theme/css/custom.css">
+    <!-- pygments code highlight -->
+    <link rel="stylesheet" href="https://banaie.ir/theme/css/pygments.css">
+    <!-- tipue search -->
+    <link rel="stylesheet" href="https://banaie.ir/theme/tipuesearch/css/tipuesearch.css">
+
+    <style>
+    /* Main article (single post) images: 70% of container, responsive */
+    .article-content .article-image img,
+    .article-content img { width:70%; max-width:900px; height:auto; display:block; margin:12px auto; }
+
+    /* On small screens use full width */
+    @media (max-width: 768px) {
+        .article-content .article-image img,
+        .article-content img { width:100%; }
+    }
+
+    /* Teaser images used on index / category / tags pages */
+    .blog-img img { width:250px; height:150px; object-fit:cover; display:block; }
+
+    /* Smaller about/contact images */
+    .about-image { max-width:200px; height:auto; }
+
+    /* General responsive images */
+    img.img-responsive { max-width:100%; height:auto; }
+    </style>
+
+    <!-- Modernizr JS -->
+    <script src="https://banaie.ir/theme/js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="/theme/js/respond.min.js"></script>
+    <![endif]-->
+        <link href="https://banaie.ir/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="سایت شخصی سید مجتبی بنائی Atom">
+
+
+
+    </head>
+    <body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZP883X"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+    <div id="fh5co-page">
+        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+        <aside id="fh5co-aside" role="complementary" class="border js-fullheight">
+
+            <nav class="fh5co-main-menu" role="navigation">
+    <ul class="language-navigation">
+        <li>
+                <a class="lang-active" href="https://banaie.ir/">fa</a>
+                <a href="https://banaie.ir/en/">en</a>
+        </li>
+    </ul>
+            </nav>
+            <div class="clearfix"></div>
+            <h1  id="fh5co-logo">
+                <a href="https://banaie.ir/index.html">
+                    <img src="/images/logo.jpg" />
+                </a>
+            </h1>
+            <nav class="fh5co-main-menu" role="navigation">
+<ul>
+    <!-- home link -->
+    <li><a href="https://banaie.ir/">Home</a></li>
+
+    <!-- page links -->
+            <li><a href="https://banaie.ir/pages/درباره-من.html">درباره من</a></li>
+
+    <!-- categories -->
+        <li><a href="https://banaie.ir/categories.html">Categories</a></li>
+
+    <!-- tags -->
+        <li><a href="https://banaie.ir/tags.html">Tags</a></li>
+
+    <!-- additional menu items from config -->
+        <!-- <li class="nav-title">Misc</li> -->
+            <li><a href="https://banaie.ir/archives.html">Archive</a></li>
+            <li><a href="https://banaie.ir/contact.html">Contact</a></li>
+
+</ul><ul><li><form id="searchform" action="https://banaie.ir/search.html">
+    <input id="tipue_search_input" data-siteurl="https://banaie.ir" type="text" size="60" class="form-control search-field" name="q">
+
+    <button type="submit" class="btn btn-primary search-submit"><i class="icon-search4"></i></button>
+</form></li></ul>
+
+            </nav>
+
+<ul id="social">
+            <li><a href="https://www.github.com/smbanaie" alt="Github"><i class="icon-github"></i></a></li>
+
+            <li><a href="https://www.facebook.com/smbanaie" alt="Facebook"><i class="icon-facebook2"></i></a></li>
+
+            <li><a href="https://www.twitter.com/smbanaie" alt="Twitter"><i class="icon-twitter2"></i></a></li>
+
+            <li><a href="https://www.linkedin.com/in/smbanaie/" alt="Linkedin"><i class="icon-linkedin2"></i></a></li>
+
+</ul>
+        </aside>
+
+        <div id="fh5co-main">
+
+    <div class="fh5co-narrow-content article-content">
+        <h1 class="fh5co-heading-colored">ردیس (Redis)  بانک اطلاعاتی NoSQL مقیم در حافظه</h1>
+
+        <div>by
+                <a href="author/mjtby-bnyy.html">مجتبی بنائی</a> - سه شنبه 23 مهر 1392
+        - گروه : <a href="category/tkhssy.html">تخصصی </a> - مشاهده : </div>
+            <div><span>برچسب‌ها: </span>
+                    <span><a href="https://banaie.ir/tag/tkhssynrmfzr.html">#تخصصی‌نرم‌افزار</a> </span>
+                    <span><a href="https://banaie.ir/tag/tjrbyt.html">#تجربیات</a> </span>
+                    <span><a href="https://banaie.ir/tag/tkhssy.html">#تخصصی</a> </span>
+                    <span><a href="https://banaie.ir/tag/rdys.html">#ردیس</a> </span>
+                    <span><a href="https://banaie.ir/tag/khsndr.html">#کاساندرا</a> </span>
+            </div>
+
+        <div class="animate-box article-image" data-animate-effect="fadeInLeft">
+            <img src="/images/static/diary.jpg" alt="ردیس (Redis)  بانک اطلاعاتی NoSQL مقیم در حافظه" class="img-responsive" width="900" height="506" loading="eager" />
+        </div>
+        <div class="animate-box" data-animate-effect="fadeInLeft">
+            <p>s: تجربیات | تخصصی | ردیس | کاساندرا دفعه اولی که با بانک اطلاعاتی ردیس به عنوان یکی از رایجترین بانکهای اطلاعاتی NoSQL در گروه بانکهای کلید/مقدار از سر کنجکاوی کار کردم ، برایم تجربه ای لذت بخش همراه با علامت سوالی بزرگ بود . لذت بخش از این باب که دیدم این دیتابیس دو دستور اصلی بیشتر ندارد یکی set  و یکی هم get . با دستور set یک شناسه (یک کلید یا مقدار منحصر بفرد) به همراه یک مقدار را ذخیره می کنیم و با دستور get و دادن کلید مورد نیاز، مقدار متناظر توسط ردیس به ما برگشت داده می شود.  علامت سوالم هم بابت این بود که دیتابیسی با این قابلیت ساده (البته در نگاه اول) چه کاربردی می تواند داشته باشد .  گذشت و گذشت تا برای یک سایت خبری دنبال راه حلی بودیم که درخواستهای ما را از کاساندرا کمتر کند و سریعتر بتوانیم به درخواستهای کاربران جواب بدهیم . ابتدا به ذهنم رسید که خاصیت حافظه نهان (cache) کاساندرا را فعال کنم که آنهم فقط روی کلید ها و سطرها فعال می شود اما متوجه شدم مشکل فقط درون حافظه نگهداشتن کلیدها یا بعضی سطرهای پردرخواست نیست بلکه نتیجه یک جست و جو در بانک اطلاعاتی باید در حافظه نهان ذخیره شود .  توضیح بیشتر اینکه در این سایت اخبار بر اساس کشور ، زبان ، گروه و ساعت جستجو می شود و خود عمل جستجو با این پارامترها زمان بر است . حال اگر کاربران زیادی همزمان این درخواستها را داشته باشند ، فشار بسیار زیادی به کاساندرا (یا هربانک دیگری که ذخیره اخبار را برعهده دارد ) وارد می شود اما اگر بتوانیم نتیجه جستجو را در بازه زمانی مثلا پنج دقیقه در حافظه نگه داریم و تمام کاربرانی که از یک کشور و با یک زبان اخبار گروه خاصی را در آن بازه جستجو کنند نتیجه جستجوی قبلی به آنها برگشت داده شود، سرعت بسیار بالا خواهد رفت .  اینجا بود که کاربرد اصلی ردیس را به عینه مشاهده کردم به این صورت که به ازای هر جستجو پارامترهای آن یعنی کشور، زبان ، ساعت و گروه را به هم می چسبانیم که کلید جستجو را شکل دهد و نتیجه جستجو ، مقدار این کلید می شود که در ردیس با زمان حذف پنج دقیقه ذخیره می شود . حال به ازای هر جستجو ، ابتدا بسته به پارامترهای آن کلید مربوطه را پیدا کرده و از ردیس مقدار مربوطه را بازیابی و به کاربر نمایش می دهیم . اگر مقداری برای آن کلید یافت نشد، آنگاه به دیتابیس اصلی وصل شده ، جستجو را انجام می دهیم ، نتیجه را در ردیس ذخیره کرده و به کاربر هم نشان می دهیم ....  هر چند ردیس قابلیت ذخیره مقادیر در حافظه اصلی یا هارد سیستم را هم دارد اما برای ما همان ذخیره موقت اطلاعات در حافظه گره گشا بود ...  به عنوان تتمه بحث اینکه علاوه بر ردیس ، بانک اطلاعاتی MemCached هم همین کار را انجام میدهد اما امکانات ردیس مانند پشتیبانی از لیست و ساختمان داده های دیگر ، باعث شد این دیتابیس را انتخاب کنیم ...</p>
+        </div>
+		<div class="animate-box" data-animate-effect="fadeInLeft">
+            <div>
+
+			<h3><!-- <i class="icon-speech-bubble"></i>  -->Comments</h3>
+		 
+		
+             
+             
+             
+		
+    </div>
+        </div>
+    </div>
+
+
+<div class="container">
+	<div class="row">
+    <div class="col-md-4 mb-4">
+		<div class="form_main">
+                <div class="form">
+               <form method="POST" action="https://api.staticman.net/v2/entry/smbanaie/smbanaie.github.io/master/comments">
+					<input name="options[redirect]" type="hidden" value="https://banaie.ir/blog/2013/10/ردیس-(Redis)-بانک-اطلاعاتی-NoSQL-مقیم-در-حافظه.html">
+					<input name="fields[url]" type="hidden" value="https://banaie.ir/blog/2013/10/ردیس-(Redis)-بانک-اطلاعاتی-NoSQL-مقیم-در-حافظه.html">
+                    <input type="text" required="" placeholder="نام" name="fields[name]"  class="txt">
+                    <input type="email" required="" placeholder="ایمیل"  name="fields[email]" class="txt">
+                    <textarea placeholder="نظر، انتقاد و پیشنهاد شما" name="fields[message]" type="text" class="txt_3" name="fields[message]"></textarea>
+                    <input type="submit" value="ارسال" name="submit" class="txt2">
+                </form>
+            </div>
+            </div>
+            </div
+	</div>
+</div>
+</div>
+
+<div class="fh5co-footer" >
+   
+    <p> طراحی و توسعه با موتور تولید محتوای استاتیک </span> <span> <a href="https://blog.getpelican.com/" target="_blank">پلیکان</a></span>
+  </p>
+
+</div>                 
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://banaie.ir/theme/js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="https://banaie.ir/theme/js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://banaie.ir/theme/js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="https://banaie.ir/theme/js/jquery.waypoints.min.js"></script>
+		
+	
+
+    <!-- MAIN JS -->
+    <script src="https://banaie.ir/theme/js/main.js"></script>
+	<script>
+        $(document).ready(function() {
+             $('#tipue_search_input').tipuesearch({
+                  'mode': 'json',
+                  'contentLocation': 'tipuesearch_content.json'
+             });
+			$( "searchform" ).submit(function( event ) {
+			var search = document.getElementById("tipue_search_input");
+            search.value = search.value.replace(/^\s*|\s*$/g, ""); //trim string of ending and beginning whitespace
+            if(search.value.indexOf(" ") != -1){ //if more then one word
+                search.value = search.value.replace(/^"*|"*$/g, "\"");	
+			return;
+			}
+		          
+		});
+		
+		});
+   
+
+    </script>
+    </body>
+</html>
